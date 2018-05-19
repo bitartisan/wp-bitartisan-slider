@@ -32,9 +32,11 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         add_action( 'admin_enqueue_scripts', array($this, 'bas_enqueue_scripts') );
         add_action( 'add_meta_boxes', array($this, 'bas_register_meta_boxes') );
         add_action( 'after_setup_theme', array( $this, 'bas_add_theme_support' ) );
+
         add_action( 'wp_ajax_bas_add_image_to_slider', array($this, 'bas_add_image_to_slider') );
         add_action( 'wp_ajax_bas_delete_slide', array($this, 'bas_delete_slide') );
         add_action( 'wp_ajax_bas_update_slides_order', array($this, 'bas_update_slides_order') );
+        add_action( 'wp_ajax_bas_get_embed_video', array($this, 'bas_get_embed_video') );
 	}
 
     function bas_create_slider_post_type() {
@@ -235,6 +237,20 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         wp_die();
     }
 
+    function bas_get_embed_video() {
+
+        if ( check_ajax_referer( 'bas-ajax-process-media', 'security', false ) ) {
+            $parent_post_id = intval($_POST['post_id']);
+            $attachment_id  = intval($_POST['attach_id']);
+            $video_url      = sanitize_text_field( $_POST['video_url'] . '&showinfo=0&controls=0&autoplay=1' );
+            $args           = $_POST['args'];
+
+            echo wp_oembed_get( $video_url, $args );
+        }
+
+        wp_die();
+    }
+
     function bas_render_add_slides_btn() {
         ?>
         <div id="bas-add-slide">
@@ -246,10 +262,7 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
                 </a>
                 <span class="bas-label bas-center"><?php echo __('or insert video', $this->namespace); ?></span>
                 <input type="text" name="bas_video_url" placeholder="Video URL (ex: https://www.youtube.com/watch?v=op07UzSCu4c)" id="bas-video-url" />
-
-                <?php
-                $embed_code = wp_oembed_get('https://www.youtube.com/watch?v=OdaI0nsG5k0');
-                ?>
+                <div id="bas-preview-video"></div>
             </div>
         </div>
         <?php

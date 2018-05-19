@@ -44,16 +44,20 @@
         this.getVideo = function(params) {
             var $this = this;
 
+            $('#bas-preview-video').addClass('bas-preview-video-loading');
+
             $.ajax({
                 url: baSliderI18N.AJAX_URL,
                 data: {
                     action: 'bas_get_embed_video',
-                    security: baSliderI18N.WPNONCE,
-                    args: params,
-                    post_id: baSliderI18N.POST_ID
+                    security: params.wpnonce,
+                    video_url: params.url,
+                    args: params.args,
+                    post_id: params.post_id
                 },
                 type: 'POST',
                 success: function(response) {
+                    $('#bas-preview-video').removeClass('bas-preview-video-loading');
                     return $this.html(response);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {

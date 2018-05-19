@@ -147,6 +147,21 @@
             $("#slider .slides").css("transform", "translate3d(-"+elementNum+"px, 0px, 0px)");
         });
 
+        $('#bas-video-url').off('keyup').on('keyup', function() {
+            var videoUrl = $(this).val();
+            setTimeout(function() {
+                $('#bas-preview-video').BaSlider('getVideo', {
+                    wpnonce: baSliderI18N.WPNONCE,
+                    post_id: baSliderI18N.POST_ID,
+                    url: videoUrl,
+                    args: {
+                        width: 600,
+                        height: 400
+                    }
+                });
+            }, 1000);
+        });
+
         $(document).off('click', '.bas-delete-slide').on('click', '.bas-delete-slide', function(e) {
             e.preventDefault();
 

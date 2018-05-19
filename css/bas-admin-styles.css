@@ -141,6 +141,13 @@
     color: #777;
 }
 
+#bas-add-slide .bas-preview-video-loading {
+    max-width: 600px;
+    margin: 20px auto;
+    border: 1px solid #ddd;
+    background: transparent url('../img/loader.gif') center center no-repeat;
+}
+
 #bas-add-slide #bas-add-slide-controls #bas-video-url::placeholder {
     color: #ccc;
 }
