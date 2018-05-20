@@ -111,6 +111,9 @@ class BitArtisanSlider {
             'BUTTON_ADD_TO_SLIDER' => __('Add to Slider', $this->namespace),
             'PREV' => __('Previous', $this->namespace),
             'NEXT' => __('Next', $this->namespace),
+            'ADD' => __('Add', $this->namespace),
+            'REMOVE' => __('Remove', $this->namespace),
+            'CANCEL' => __('Cancel', $this->namespace),
             'WARN_DELETE_SLIDE' => __('Are you sure you want to remove this slide?', $this->namespace),
             'WARN_DELETE_CAPTION' => __('Are you sure you want to remove this caption?', $this->namespace),
         );

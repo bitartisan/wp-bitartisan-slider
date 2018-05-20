@@ -143,6 +143,7 @@
 
 #bas-add-slide .bas-preview-video-loading {
     max-width: 600px;
+    min-height: 400px;
     margin: 20px auto;
     border: 1px solid #ddd;
     background: transparent url('../img/loader.gif') center center no-repeat;
@@ -150,6 +151,49 @@
 
 #bas-add-slide #bas-add-slide-controls #bas-video-url::placeholder {
     color: #ccc;
+}
+
+#bas-preview-video {
+    max-width: 600px;
+    min-height: 340px;
+    margin: 20px auto;
+    position: relative;
+}
+
+#bas-preview-video  .bas-video-btn {
+    position: absolute;
+    top: 15px;
+    padding: 4px 10px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+#bas-preview-video  .bas-video-btn:hover {
+    text-decoration: underline;
+}
+
+#bas-preview-video #bas-cancel-video {
+    right: 20px;
+    background-color: #D13D0F;
+}
+
+#bas-preview-video #bas-add-video {
+    right: 90px;
+    background-color: #0085BA;
+}
+
+#bas-video-error {
+    padding: 20px 0;
+    line-height: 2;
+    font-size: 2em;
+    color: #aaa;
+}
+
+#bas-video-error span.fas {
+    display: block;
+    font-size: 4em;
+    color: #999;
 }
 
 #bas-add-slide #bas-add-slide-controls .bas-label {

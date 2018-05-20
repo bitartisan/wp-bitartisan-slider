@@ -52,13 +52,20 @@
                     action: 'bas_get_embed_video',
                     security: params.wpnonce,
                     video_url: params.url,
-                    args: params.args,
-                    post_id: params.post_id
+                    video_thumb: params.thumb,
                 },
                 type: 'POST',
+                dataType: 'json',
                 success: function(response) {
                     $('#bas-preview-video').removeClass('bas-preview-video-loading');
-                    return $this.html(response);
+                    var html = '<div id="bas-video-error"><span class="fas fa-exclamation-triangle"></span>Unknown video service</div>';
+                    if (response.success) {
+                        html = '<a href="javascript:;" id="bas-cancel-video" class="bas-video-btn">' + params.cancel + '</a>'
+                             + '<a href="javascript:;" id="bas-add-video" class="bas-video-btn" data-postid="' + params.post_id + '" data-thumb="' + response.thumb + '">' + params.add + '</a>'
+                             + response.iframe;
+                    }
+
+                    return $this.html(html);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     // return error message
