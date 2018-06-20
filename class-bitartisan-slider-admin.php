@@ -244,34 +244,28 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         if ( check_ajax_referer( 'bas-ajax-process-media', 'security', false ) ) {
             $parent_post_id = intval($_POST['post_id']);
             $video_url      = esc_url( $_POST['video_url'] );
-
-            $iframe = wp_oembed_get( $video_url, array('width' => 600, 'height' => 400) );
+            $iframe         = wp_oembed_get( $video_url, array('width' => 600, 'height' => 400) );
 
             $video_service_arr = array('YOUTUBE', 'VIMEO');
             foreach ( $video_service_arr as $service) {
                 $match = preg_match('/(' . $service . ')/i', $video_url, $matches);
-                if ( $match ) {
+                if ( $match && $iframe ) {
+                    $response['success'] = true;
                     switch ( $service ) {
                         case 'YOUTUBE':
-                            if ( $iframe ) {
-                                $iframe              = str_replace('?feature=oembed', '?feature=oembed&showinfo=0&controls=0&modestbranding=1&rel=0', $iframe);
-                                $response['iframe']  = $iframe;
-                                $video_url_arr       = explode('?v=', $video_url);
-                                $video_id            = $video_url_arr[1];
-                                $response['thumb']   = 'https://img.youtube.com/vi/' . $video_id . '/0.jpg';
-                                $response['success'] = true;
-                            }
+                            $iframe              = str_replace('?feature=oembed', '?feature=oembed&showinfo=0&controls=0&modestbranding=1&rel=0', $iframe);
+                            $response['iframe']  = $iframe;
+                            $video_url_arr       = explode('?v=', $video_url);
+                            $video_id            = $video_url_arr[1];
+                            $response['thumb']   = 'https://img.youtube.com/vi/' . $video_id . '/0.jpg';
                             break;
                         case 'VIMEO':
-                            if ( $iframe ) {
-                                $video_url_arr       = explode('/', $video_url);
-                                $video_id            = end($video_url_arr);
-                                $video_info          = json_decode( file_get_contents('http://vimeo.com/api/v2/video/' . $video_id . '.json') );
-                                $iframe              = preg_replace('/src=\"(.*)\"/', 'src="https://player.vimeo.com/video/' . $video_id . '?title=0&byline=0&portrait=0" width="600" height="338"', $iframe);
-                                $response['iframe']  = $iframe;
-                                $response['thumb']   = $video_info[0]->thumbnail_large;
-                                $response['success'] = true;
-                            }
+                            $video_url_arr       = explode('/', $video_url);
+                            $video_id            = end($video_url_arr);
+                            $video_info          = json_decode( file_get_contents('http://vimeo.com/api/v2/video/' . $video_id . '.json') );
+                            $iframe              = preg_replace('/src=\"(.*)\"/', 'src="https://player.vimeo.com/video/' . $video_id . '?title=0&byline=0&portrait=0" width="600" height="338"', $iframe);
+                            $response['iframe']  = $iframe;
+                            $response['thumb']   = $video_info[0]->thumbnail_large;
                             break;
                     }
                 }
