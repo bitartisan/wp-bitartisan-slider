@@ -128,6 +128,7 @@
                             });
 
                             $('#carousel ul.slides li:first-child').trigger('click');
+                            console.log('cucu');
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -208,9 +209,7 @@
             $('#bas-context-menu-' + slideId).fadeToggle();
         });
 
-
         /* slide captions */
-
         $('.bas-add-caption').off('click').on('click', function(e) {
             e.preventDefault();
             $.fn.BaSlider('addCaption', {
@@ -257,7 +256,7 @@
                         post_id: baSliderI18N.POST_ID
                     },
                     type: 'POST',
-                    success: function(response) {
+                    success: function() {
                         window.location.reload(true);
                     },
                     error: function(jqXHR, textStatus, errorThrown) {

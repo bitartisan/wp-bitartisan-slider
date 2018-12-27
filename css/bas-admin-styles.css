@@ -8,9 +8,14 @@
     border: 1px dashed #aaa;
 }
 
-#bitartisanslider-slides #carousel ul.slides li {
+#bitartisanslider-slides #carousel ul.slides li.bas-ui-state-default {
     position: relative;
     cursor: pointer;
+    opacity: 0.8;
+}
+
+#bitartisanslider-slides #carousel ul.slides li.bas-ui-state-default:hover {
+    opacity: 1;
 }
 
 #bitartisanslider-slides #slider ul.slides li.bas-slide {
