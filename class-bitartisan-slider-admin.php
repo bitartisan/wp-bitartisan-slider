@@ -39,10 +39,6 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         add_action( 'wp_ajax_bas_get_embed_video', array($this, 'bas_get_embed_video') );
     }
 
-    function fakeFunc() {
-        return false;
-    }
-
     function bas_create_slider_post_type() {
         $labels = array(
           'name'               => __('Slider', $this->namespace),
