@@ -127,8 +127,7 @@
                                 slider.addSlide( slideObjSlider, 0 );
                             });
 
-                            $('#carousel ul.slides li:first-child').trigger('click');
-                            console.log('cucu');
+                            $('#publish').trigger('click');
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {
@@ -183,6 +182,7 @@
                     },
                     type: 'POST',
                     success: function(response) {
+
                         if (response) {
                             // remove slide
                             var carousel = $('#carousel').data('flexslider');
@@ -192,6 +192,8 @@
                             slider.removeSlide( $('#slide-' + slideId) );
                             carousel.flexslider(0);
                             slider.flexslider(0);
+
+                            $('#publish').trigger('click');
                         }
                     },
                     error: function(jqXHR, textStatus, errorThrown) {

@@ -134,7 +134,14 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         <!-- render the slides -->
         <div id="slider" class="flexslider">
             <ul class="slides">
-                <?php foreach ($slides_arr as $key => $slide) : ?>
+                <?php foreach ($slides_arr as $key => $slide) :
+
+                    echo "<pre>";
+                    print_r($slide);
+                    echo "</pre>";
+                    die(1);
+
+                    ?>
                     <li id="slide-<?php echo $slide['ID']; ?>" class="bas-slide" <?php echo ( $slide['ID'] > 0 ? 'style="background: transparent url(' . $slide['baseurl'] . $slide['file'] . ') no-repeat; background-size: cover;"' : ''); ?>>
                         <?php if ( $slide['ID'] > 0 ) : ?>
                             <ul id="bas-slide-menu">
@@ -229,6 +236,7 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
             );
 
             wp_update_post( $attachment );
+            wp_delete_attachment( $attachment_id, true );
 
             $success = true;
         }
