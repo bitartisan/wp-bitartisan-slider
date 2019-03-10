@@ -16,6 +16,8 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Copyright 2018 BitArtisan.
 */
 
+// modification number 2
+
 if ( ! defined('WPINC') ) {
     exit;
 }
