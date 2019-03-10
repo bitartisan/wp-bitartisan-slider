@@ -37,7 +37,11 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         add_action( 'wp_ajax_bas_delete_slide', array($this, 'bas_delete_slide') );
         add_action( 'wp_ajax_bas_update_slides_order', array($this, 'bas_update_slides_order') );
         add_action( 'wp_ajax_bas_get_embed_video', array($this, 'bas_get_embed_video') );
-	}
+    }
+
+    function fakeFunc() {
+        return false;
+    }
 
     function bas_create_slider_post_type() {
         $labels = array(
@@ -79,25 +83,25 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
 
     function bas_register_meta_boxes() {
         add_meta_box(
-	        $this->namespace . '-slides',
-	        __( 'Slides', $this->namespace ),
-	        array($this, 'bas_render_metabox'),
-	        $this->namespace,
-	        'advanced',
-	        'high',
-	        array('meta_box' => 'slides')
-	    );
+            $this->namespace . '-slides',
+            __( 'Slides', $this->namespace ),
+            array($this, 'bas_render_metabox'),
+            $this->namespace,
+            'advanced',
+            'high',
+            array('meta_box' => 'slides')
+        );
 
-	    add_meta_box(
-	        $this->namespace . '-settings',
-	        __( 'Slider Settings', $this->namespace ),
-	        array($this, 'bas_render_metabox'),
-	        $this->namespace,
-	        'side',
-	        'low',
-	        array('meta_box' => 'settings')
-	    );
-	}
+        add_meta_box(
+            $this->namespace . '-settings',
+            __( 'Slider Settings', $this->namespace ),
+            array($this, 'bas_render_metabox'),
+            $this->namespace,
+            'side',
+            'low',
+            array('meta_box' => 'settings')
+        );
+    }
 
     function bas_render_metabox($post, $params) {
         $box = strtoupper($params['args']['meta_box']);
@@ -165,7 +169,7 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
             </ul>
         </div>
         <?php
-	}
+    }
 
     function bas_add_image_to_slider() {
         $response = array(
@@ -199,10 +203,10 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
                     array_push( $response['images'], $slide_arr );
                     $response['success'] = true;
                 } else {
-                	$errors = $post_id->get_error_messages();
-                	foreach ($errors as $error) {
-                		array_push( $response['msg'], $error );
-                	}
+                    $errors = $post_id->get_error_messages();
+                    foreach ($errors as $error) {
+                        array_push( $response['msg'], $error );
+                    }
                 }
             }
         }
@@ -307,7 +311,7 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
             <p>Settings</p>
         </div>
         <?php
-	}
+    }
 
     function bas_add_theme_support() {
         add_image_size( 'slider-thumb', 150, 150, array('center', 'center') );
@@ -342,10 +346,10 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
             }
 
             wp_localize_script( $this->namespace . '-scripts', 'baSliderI18N', $data_global_arr );
-    		wp_enqueue_script( $this->namespace . '-scripts' );
+            wp_enqueue_script( $this->namespace . '-scripts' );
             wp_enqueue_media();
         }
-	}
+    }
 }
 
 new BitArtisanSliderAdmin();
