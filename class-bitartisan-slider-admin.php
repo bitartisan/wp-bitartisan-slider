@@ -314,7 +314,7 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
             // styles
             wp_enqueue_style( $this->namespace . '-fontawesome', $this->plugin_url . 'css/fontawesome.min.css' );
             wp_enqueue_style( $this->namespace . '-flexslider', $this->plugin_url . 'css/flexslider.min.css' );
-            wp_enqueue_style( $this->namespace . '-styles', $this->plugin_url . 'css/bas-admin-styles.css' );
+            wp_enqueue_style( $this->namespace . '-styles', $this->plugin_url . 'css/bas-admin-styles.min.css' );
             wp_enqueue_style( 'jquery-ui-theme', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/cupertino/jquery-ui.css' );
 
             // scripts
