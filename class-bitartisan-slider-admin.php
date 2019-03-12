@@ -72,7 +72,7 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
           'menu_position'      => null,
           'menu_icon'          => 'dashicons-welcome-view-site',
           'supports'           => array( 'title' ),
-       );
+        );
 
         register_post_type($this->namespace, $args);
     }
@@ -135,12 +135,6 @@ class BitArtisanSliderAdmin extends BitArtisanSlider {
         <div id="slider" class="flexslider">
             <ul class="slides">
                 <?php foreach ($slides_arr as $key => $slide) :
-
-                    echo "<pre>";
-                    print_r($slide);
-                    echo "</pre>";
-                    die(1);
-
                     ?>
                     <li id="slide-<?php echo $slide['ID']; ?>" class="bas-slide" <?php echo ( $slide['ID'] > 0 ? 'style="background: transparent url(' . $slide['baseurl'] . $slide['file'] . ') no-repeat; background-size: cover;"' : ''); ?>>
                         <?php if ( $slide['ID'] > 0 ) : ?>
